@@ -42,9 +42,11 @@
 ## 폴더 구성
 
 ```text
+.docs/           # 기획 색인 및 작업 하네스
 Assets/
-├─ Scenes/      # 게임 씬
-└─ Settings/    # Unity 및 렌더링 설정
+├─ Scenes/       # 게임 씬
+├─ Scripts/      # 게임 코드
+└─ Settings/     # Unity 및 렌더링 설정
 ```
 
 ## 기획 문서
