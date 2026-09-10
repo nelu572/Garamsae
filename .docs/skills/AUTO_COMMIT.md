@@ -12,11 +12,38 @@
 
 ## 메시지 규칙
 
-- 형식: `<type>(<scope>): <한글 설명>` 또는 `<type>: <한글 설명>`
-- `type`과 선택적인 `scope`는 영어, 설명은 한글로 작성한다.
-- 현재 저장소의 기존 형식을 존중하므로 scope를 강제하지 않는다.
-- type: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`, `perf`
-- scope 예시: `Player`, `Prologue`, `Scene`, `Input`, `Core`, `UI`, `Audio`, `Build`, `Docs`, `Harness`, `Test`
+- 형식: `<type>(<scope>): <한글 설명>`
+- `type`과 `scope`는 영어, 설명은 한글로 작성한다. scope는 모든 커밋에 반드시 하나를 사용한다.
+- 변경의 주된 목적에 맞는 type을 하나만 사용한다.
+
+| Type | 적용 기준 |
+| --- | --- |
+| `feat` | 새 게임 기능·콘텐츠 추가 |
+| `fix` | 의도와 다른 동작, 오류, 회귀 수정 |
+| `refactor` | 동작을 바꾸지 않는 코드·구조 개선 |
+| `test` | 자동 테스트, 테스트 도구, 검증 코드 변경 |
+| `docs` | 기획·프로젝트·Notion 문서 변경 |
+| `chore` | 빌드, 패키지, 저장소, 도구 설정 변경 |
+| `perf` | 기능은 유지하면서 성능을 개선하는 변경 |
+
+- 변경의 주된 게임·작업 영역에 맞는 scope를 하나 선택한다. 여러 영역이 한 기능을 위해 함께 바뀌면 그 기능의 중심 영역을 scope로 사용한다. 예를 들어 플레이어 대시에 필요한 Input 변경은 `Player`로 분류한다. 서로 독립된 영역의 변경은 scope를 섞지 말고 별도 커밋으로 나눈다.
+
+| Scope | 적용 범위 |
+| --- | --- |
+| `Player` | 이동, 달리기, 스태미나, 회피, 재생 |
+| `Prologue` | 프롤로그 흐름과 연출 |
+| `Scene` | 씬 구성, 씬 전환, 개발 씬 |
+| `Input` | Input System과 조작 |
+| `Core` | 공용 값, 태그, 레이어, 기반 시스템 |
+| `UI` | HUD와 메뉴 UI |
+| `Audio` | BGM, 효과음, 믹서 |
+| `Build` | Unity·패키지·빌드 설정 |
+| `Repo` | README, `.gitignore`, 저장소 루트 문서·설정 |
+| `Notion` | Notion 기획 원문과 로컬 Notion 안내서 |
+| `Harness` | 에이전트 작업 절차와 하네스 문서 |
+| `Test` | 테스트와 검증 환경 |
+
+- scope는 하나만 사용하고 복수 scope를 조합하지 않는다. 예: `feat(Player): 대시 추가`, `docs(Harness): 커밋 절차 명시`, `docs(Repo): README 갱신`, `docs(Notion): 기획서 안내 갱신`, `chore(Build): 프로젝트 전반 설정 정리`.
 
 ## Unity 점검
 
