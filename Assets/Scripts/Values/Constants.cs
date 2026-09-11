@@ -4,9 +4,10 @@ public static class Constants
     {
         public const float MoveSpeed = 8.0f;
         public const float RunSpeed = 11.0f;
-        public const float GroundAcceleration = 30.0f;
-        public const float GroundDeceleration = 36.0f;
-        public const float AirAcceleration = 18.0f;
+        public const float GroundAcceleration = 55.0f;
+        public const float GroundDeceleration = 80.0f;
+        public const float GroundTurnAcceleration = 110.0f;
+        public const float AirAcceleration = 28.0f;
         public const float JumpForce = 8.0f;
 
         public const float MaxStamina = 3.0f;

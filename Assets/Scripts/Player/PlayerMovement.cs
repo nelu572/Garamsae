@@ -15,6 +15,7 @@ public sealed class PlayerMovement : MonoBehaviour
     [SerializeField, Min(0.0f)] private float moveSpeed = Constants.Player.MoveSpeed;
     [SerializeField, Min(0.0f)] private float groundAcceleration = Constants.Player.GroundAcceleration;
     [SerializeField, Min(0.0f)] private float groundDeceleration = Constants.Player.GroundDeceleration;
+    [SerializeField, Min(0.0f)] private float groundTurnAcceleration = Constants.Player.GroundTurnAcceleration;
     [SerializeField, Min(0.0f)] private float airAcceleration = Constants.Player.AirAcceleration;
 
     [Header("Jump")]
@@ -63,13 +64,28 @@ public sealed class PlayerMovement : MonoBehaviour
             return;
         }
 
-        float acceleration = IsGrounded
-            ? (hasMoveInput ? groundAcceleration : groundDeceleration)
-            : airAcceleration;
-
         Vector2 velocity = body.linearVelocity;
+        float acceleration = GetHorizontalAcceleration(hasMoveInput, targetSpeed, velocity.x);
         velocity.x = Mathf.MoveTowards(velocity.x, targetSpeed, acceleration * Time.fixedDeltaTime);
         body.linearVelocity = velocity;
+    }
+
+    private float GetHorizontalAcceleration(bool hasMoveInput, float targetSpeed, float currentSpeed)
+    {
+        if (!IsGrounded)
+        {
+            return airAcceleration;
+        }
+
+        if (!hasMoveInput)
+        {
+            return groundDeceleration;
+        }
+
+        bool isTurning = !Mathf.Approximately(currentSpeed, 0.0f)
+            && Mathf.Sign(currentSpeed) != Mathf.Sign(targetSpeed);
+
+        return isTurning ? groundTurnAcceleration : groundAcceleration;
     }
 
     private void TryJump()
